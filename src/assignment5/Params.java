@@ -1,3 +1,15 @@
+/* CRITTERS GUI Params.java
+ * EE422C Project 5 submission by
+ * Aaron Chang
+ * AAC3434
+ * 16475
+ * Siva Manda
+ * SM48525
+ * 16480
+ * Slip days used: <0>
+ * Git URL: https://github.com/aaronachang/Project5
+ * Fall 2016
+ */
 package assignment5;
 
 public class Params {
