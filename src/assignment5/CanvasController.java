@@ -34,7 +34,7 @@ public class CanvasController implements Initializable {
         //centerNodeInScrollPane(scrollPane, (Node) critterCanvas);
     }
     
-    public void cool() {
-    	System.out.println("cool");
-    }
+//    public void cool() {
+//    	System.out.println("cool");
+//    }
 }

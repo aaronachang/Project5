@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -20,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="512.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterWorldController">
+<VBox prefHeight="730.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterWorldController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -39,7 +45,7 @@
         </Menu>
       </menus>
     </MenuBar>
-      <SplitPane dividerPositions="0.7688022284122563" prefHeight="257.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.5" prefHeight="257.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
         <items>
             <ScrollPane fx:id="scrollPane" fitToHeight="true" hbarPolicy="ALWAYS" hvalue="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="449.0" prefViewportHeight="480.0" prefViewportWidth="640.0" prefWidth="640.0" vbarPolicy="ALWAYS" vvalue="0.5">
                <content>
@@ -66,7 +72,7 @@
                               </Label>
                            </center>
                            <bottom>
-                              <HBox prefHeight="37.0" prefWidth="152.0" BorderPane.alignment="CENTER">
+                              <HBox prefHeight="38.0" prefWidth="152.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <TextField prefHeight="27.0" prefWidth="50.0" text="1">
                                        <HBox.margin>
@@ -82,12 +88,13 @@
                               </HBox>
                            </bottom>
                         </BorderPane>
+                        <Text fx:id="totalSteps" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="148.13671875" />
                         <Button fx:id="resetButton" mnemonicParsing="false" onAction="#clearWorld" prefHeight="27.0" prefWidth="146.0" text="Reset">
                            <VBox.margin>
                               <Insets bottom="4.0" left="4.0" right="4.0" />
                            </VBox.margin>
                         </Button>
-                        <Separator prefWidth="200.0" />
+                        <Separator prefHeight="0.0" prefWidth="152.0" />
                         <BorderPane prefHeight="36.0" prefWidth="152.0">
                            <top>
                               <Label prefHeight="17.0" prefWidth="42.0" text="World" BorderPane.alignment="CENTER">

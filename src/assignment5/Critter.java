@@ -96,7 +96,7 @@ public abstract class Critter {
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() { return "*"; }
 	
-	private int energy = 0;
+	private int energy = Params.start_energy;
 	protected int getEnergy() { return energy; }
 	
 	private static final Point[] dir = {
@@ -258,12 +258,14 @@ public abstract class Critter {
 	 */	
 	public static void worldTimeStep() {
 		timestep++;
+		
 		for (ArrayList<Critter> spot : world.values()) {
 			for (Critter bug : spot) {
 				bug.hasMoved = false;
 				bug.doTimeStep();
 			}
 		}
+
 		resolveEncounters();
 		
 		// Update rest energy
@@ -279,6 +281,7 @@ public abstract class Critter {
 			e.printStackTrace();
 		}
 		
+
 		// Remove dead critters
 		Iterator<Critter> iter = population.iterator();
 		while (iter.hasNext()) {
@@ -287,7 +290,7 @@ public abstract class Critter {
 				iter.remove();
 			}
 		}
-				
+		
 		// Add babies to population
 		population.addAll(babies);
 		
@@ -464,5 +467,6 @@ public abstract class Critter {
 		world.clear();
 		population.clear();
 		babies.clear();
+		timestep = 0;
 	}
 }
