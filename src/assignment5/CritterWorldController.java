@@ -1,5 +1,7 @@
 package assignment5;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.List;
@@ -17,6 +19,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -27,6 +30,7 @@ public class CritterWorldController implements Initializable {
 	
 	private static final int SQ_SIZE = 6;
 	
+	@FXML private TextArea critterStats;
 	@FXML private Text totalSteps;
 	@FXML private TextField seedField;
 	@FXML private TextField critterAddCount;
@@ -81,6 +85,7 @@ public class CritterWorldController implements Initializable {
         
         draw(critterCanvas, Params.world_width*SQ_SIZE, Params.world_height*SQ_SIZE);
         totalSteps.setText("Step " + Critter.timestep);
+        if (checked) printStats();
     }
     
     @FXML
@@ -110,11 +115,35 @@ public class CritterWorldController implements Initializable {
     	},0,200);
     }
     
+    boolean checked = false;
+    
+    protected void printStats() {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    PrintStream ps = new PrintStream(baos);
+	    PrintStream old = System.out;
+	    try {
+	    	List<Critter> crts = Critter.getInstances("Craig");
+	    	Class<?> classes;
+			classes = Class.forName("assignment5." + "Craig");
+			System.setOut(ps);
+			classes.getMethod("runStats", java.util.List.class).invoke(null, crts);
+			System.out.flush();
+		    System.setOut(old);
+		    critterStats.setText(baos.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
     @FXML
-    protected void toggleStats() throws InvalidCritterException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		List<Critter> crts = Critter.getInstances("Craig");
-		Class<?> classes = Class.forName("assignment5." + "Craig");
-		classes.getMethod("runStats", java.util.List.class).invoke(null, crts);
+    protected void toggleStats() {
+    	if (!checked) {
+			printStats();
+			checked = true;
+		} else {
+			critterStats.setText("");
+			checked = false;
+		}
     }
 
     public void centerNodeInScrollPane(ScrollPane scrollPane, Node node) {
@@ -149,7 +178,7 @@ public class CritterWorldController implements Initializable {
         
         
         for (Critter c : Critter.getPopulation()) {
-        	//if (c.getX_coord() < 0 || c.getY_coord() < 0) System.out.println(c.getX_coord() + " - " + c.getY_coord());
+        	if (c.getX_coord() < 0 || c.getY_coord() < 0) System.out.println(c.getX_coord() + " - " + c.getY_coord());
         	if (c.viewColor() == c.viewOutlineColor()) {
         		gc.setFill(c.viewColor());
         		switch(c.viewShape()) {

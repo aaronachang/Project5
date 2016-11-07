@@ -120,7 +120,9 @@ public abstract class Critter {
 	 */    	
 	private void move(int direction) {
     	x_coord = (x_coord + dir[direction].x) % Params.world_width;
+    	if (x_coord < 0) x_coord += Params.world_width;
     	y_coord = (y_coord + dir[direction].y) % Params.world_height;
+    	if (y_coord < 0) y_coord += Params.world_height;
     	hasMoved = true;
    	}
 	
@@ -158,7 +160,9 @@ public abstract class Critter {
 		energy = energy % 2 == 0 ? energy / 2 : energy / 2 + 1;
 		
 		offspring.x_coord = (x_coord + dir[direction].x) % Params.world_width;
+		if (offspring.x_coord < 0) offspring.x_coord += Params.world_width;
 		offspring.y_coord = (x_coord + dir[direction].x) % Params.world_width;
+		if (offspring.y_coord < 0) offspring.y_coord += Params.world_height;
 		babies.add(offspring);
 	}
 
@@ -175,14 +179,18 @@ public abstract class Critter {
 	private static int nextAdjacentPoint(Point p){
 		for (int direction = 0; direction < 8; direction++) { // walk
 			int temp_x = (p.x + dir[direction].x) % Params.world_width;
+			if (temp_x < 0) temp_x += Params.world_width;
 			int temp_y = (p.y + dir[direction].y) % Params.world_height;
+			if (temp_y < 0) temp_y += Params.world_height;
 			Point temp_p = new Point(temp_x, temp_y);
 			if (!world.containsKey(temp_p) || world.get(temp_p).size() == 0) { return direction; }
 		}
 		
 		for (int direction = 0; direction < 8; direction++) { // run if walk isn't an option
 			int temp_x = (p.x + 2 * dir[direction].x) % Params.world_width;
+			if (temp_x < 0) temp_x += Params.world_width;
 			int temp_y = (p.y + 2 * dir[direction].y) % Params.world_height;
+			if (temp_y < 0) temp_y += Params.world_height;
 			Point temp_p = new Point(temp_x, temp_y);
 			if (!world.containsKey(temp_p) || world.get(temp_p).size() == 0) { return direction + 8; }
 		}
