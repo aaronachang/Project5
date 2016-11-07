@@ -64,7 +64,21 @@ public abstract class Critter {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
 	
-	protected String look(int direction, boolean steps) {return "";}
+	protected String look(int direction, boolean steps) {
+		energy -= Params.look_energy_cost;
+		int distance = steps ? 2 : 1;
+		
+    	int x = (x_coord + distance * dir[direction].x) % Params.world_width;
+    	if (x < 0) x += Params.world_width;
+    	int y = (y_coord + distance * dir[direction].y) % Params.world_height;
+    	if (y < 0) y += Params.world_height;
+    	Point p = new Point(x, y);
+    	
+    	if (world.containsKey(p) && world.get(p).size() > 0) {
+    		return world.get(p).get(0).toString();
+    	}
+    	return null;
+	}
 	
 	/* rest is unchanged from Project 4 */
 	
@@ -80,7 +94,7 @@ public abstract class Critter {
 	
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
-	public String toString() { return ""; }
+	public String toString() { return "*"; }
 	
 	private int energy = 0;
 	protected int getEnergy() { return energy; }
@@ -105,9 +119,9 @@ public abstract class Critter {
 	 * @param direction manipulates where the new coordinate pair should be
 	 */    	
 	private void move(int direction) {
-    		x_coord = (x_coord + dir[direction].x) % Params.world_width;
-    		y_coord = (y_coord + dir[direction].y) % Params.world_height;
-    		hasMoved = true;
+    	x_coord = (x_coord + dir[direction].x) % Params.world_width;
+    	y_coord = (y_coord + dir[direction].y) % Params.world_height;
+    	hasMoved = true;
    	}
 	
 	/**
@@ -237,7 +251,7 @@ public abstract class Critter {
 		}
 	}
 	
-	private static int timestep = 0;
+	protected static int timestep = 0;
 	
 	/**
 	 * Called by main when user enter the "step" command, calls resolveEncounters() and steps the critter
@@ -260,7 +274,7 @@ public abstract class Critter {
 		// Add algae
 		try {
 			for (int i = 0; i < Params.refresh_algae_count; i++)
-				makeCritter("Algae");
+				makeCritter("assignment5.Algae");
 		} catch (InvalidCritterException e) {
 			e.printStackTrace();
 		}
@@ -293,22 +307,7 @@ public abstract class Critter {
 	 * displays a map of the space or "world" the critters are in
 	 */	
 	public static void displayWorld() {
-		for (int i = -1; i <= Params.world_height; i++) {
-			for (int j = -1; j <= Params.world_width; j++) {
-				if (i == -1 || i == Params.world_height)
-					System.out.print((j == -1 || j == Params.world_width) ? '+' : '-');
-				else {
-					Point currentPosition = new Point(j, i);
-					if (j == -1 || j == Params.world_width)
-						System.out.print('|');
-					else if (world.containsKey(currentPosition) && world.get(currentPosition).size() > 0)
-						System.out.print(world.get(currentPosition).get(0));
-					else
-						System.out.print(' ');
-				}
-			}
-			System.out.println();
-		}
+		Main.launch(Main.class);
 	}
 	
 	/** 
@@ -324,7 +323,7 @@ public abstract class Critter {
 		Object instanceOfMyCritter = null;
 
 	    try {
-			myCritter = Class.forName("assignment4." + critter_class_name);
+			myCritter = Class.forName(critter_class_name);
 		    constructor = myCritter.getConstructor(); // get null parameter constructor
 		    instanceOfMyCritter = constructor.newInstance(); // create instance
 		    Critter me = (Critter) instanceOfMyCritter; // cast to Critter
@@ -361,7 +360,7 @@ public abstract class Critter {
 		
 		for (ArrayList<Critter> bugs : world.values()) {
 			for (Critter bug : bugs) {
-				if (bug.getClass().getTypeName().equals("assignment4." + critter_class_name))
+				if (bug.getClass().getTypeName().equals("assignment5." + critter_class_name))
 					result.add(bug);
 			}
 		}
@@ -390,6 +389,18 @@ public abstract class Critter {
 			prefix = ", ";
 		}
 		System.out.println();		
+	}
+	
+	protected int getX_coord() {
+		return x_coord;
+	}
+	
+	protected int getY_coord() {
+		return y_coord;
+	}
+	
+	protected static List<Critter> getPopulation() {
+		return population;
 	}
 	
 	/* the TestCritter class allows some critters to "cheat". If you want to 
@@ -448,9 +459,10 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		for (ArrayList<Critter> spot : world.values())
-			spot.clear();
-		population = new java.util.ArrayList<Critter>();
-		babies = new java.util.ArrayList<Critter>();
+//		for (ArrayList<Critter> spot : world.values())
+//			spot.clear();
+		world.clear();
+		population.clear();
+		babies.clear();
 	}
 }
