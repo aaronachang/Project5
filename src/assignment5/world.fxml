@@ -26,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="730.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterWorldController">
+<VBox prefHeight="730.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterWorldController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -58,7 +58,7 @@
             </ScrollPane>
             <ScrollPane fitToHeight="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="153.0">
                <content>
-                  <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="152.0">
+                  <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="155.0">
                      <children>
                         <BorderPane prefHeight="27.0" prefWidth="152.0">
                            <center>
@@ -88,12 +88,7 @@
                               </HBox>
                            </bottom>
                         </BorderPane>
-                        <Text fx:id="totalSteps" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="148.13671875" />
-                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#clearWorld" prefHeight="27.0" prefWidth="146.0" text="Reset">
-                           <VBox.margin>
-                              <Insets bottom="4.0" left="4.0" right="4.0" />
-                           </VBox.margin>
-                        </Button>
+                        <Text fx:id="totalSteps" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.13671875" />
                         <Separator prefHeight="0.0" prefWidth="152.0" />
                         <BorderPane prefHeight="36.0" prefWidth="152.0">
                            <top>
@@ -145,16 +140,6 @@
                         </Button>
                         <Separator prefWidth="200.0" />
                         <BorderPane prefHeight="35.0" prefWidth="152.0">
-                           <top>
-                              <Label prefHeight="11.0" prefWidth="60.0" text="Interface" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <BorderPane.margin>
-                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                                 </BorderPane.margin>
-                              </Label>
-                           </top>
                            <left>
                               <CheckBox fx:id="showStatsBox" mnemonicParsing="false" onAction="#toggleStats" text="Show Stats" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
@@ -166,15 +151,41 @@
                         <VBox fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="122.0" prefWidth="152.0">
                            <children>
                               <Separator prefWidth="200.0" />
-                              <TextArea fx:id="critterStats" prefHeight="144.0" prefWidth="152.0" />
+                              <TextArea fx:id="critterStats" prefHeight="109.0" prefWidth="200.0" />
                            </children>
                         </VBox>
-                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#startSim" prefHeight="43.0" prefWidth="148.0" text="Play">
+                        <BorderPane prefHeight="95.0" prefWidth="152.0">
+                           <top>
+                              <Label text="Animation Speed" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </top>
+                           <right>
+                              <Slider fx:id="animationSlider" prefHeight="22.0" prefWidth="152.0" value="50.0" BorderPane.alignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
+                              </Slider>
+                           </right>
+                        </BorderPane>
+                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#startSim" prefHeight="43.0" prefWidth="147.0" text="Play">
                            <VBox.margin>
                               <Insets bottom="4.0" left="4.0" right="4.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#quit" prefHeight="43.0" prefWidth="148.0" text="Quit">
+                        <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseSim" prefHeight="43.0" prefWidth="147.0" text="Pause">
+                        	<VBox.margin>
+                              <Insets bottom="4.0" left="4.0" right="4.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#clearWorld" prefHeight="43.0" prefWidth="147.0" text="Reset">
+                           <VBox.margin>
+                              <Insets bottom="4.0" left="4.0" right="4.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" prefHeight="43.0" prefWidth="147.0" text="Quit">
                            <VBox.margin>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                            </VBox.margin>

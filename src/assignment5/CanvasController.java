@@ -33,8 +33,4 @@ public class CanvasController implements Initializable {
     	critterCanvas.setHeight(Params.world_height * SQ_SIZE);
         //centerNodeInScrollPane(scrollPane, (Node) critterCanvas);
     }
-    
-//    public void cool() {
-//    	System.out.println("cool");
-//    }
 }

@@ -25,29 +25,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//System.out.println(getClass().getResource("world.fxml"));
 		Parent root = FXMLLoader.load(getClass().getResource("world.fxml"));
 		primaryStage.setTitle("Critter World");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.show();
 	}
-//	static GridPane grid = new GridPane();
-//	@Override public void start(Stage primaryStage) {
-//		try {
-//			grid.setGridLinesVisible(true);
-//			Scene scene = new Scene(grid, 500, 500); primaryStage.setScene(scene);
-//			primaryStage.show();
-//			//Painter.paint();
-//			//grid.setStyle("-fx-background-color: #e9ecee;");
-//			grid.setGridLinesVisible(true);
-//
-//		// Paints the icons. Painter.paint();
-//		} catch(Exception e) { 
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	public static void main(String[] args) {
-//			launch(args);
-//	}
 }
