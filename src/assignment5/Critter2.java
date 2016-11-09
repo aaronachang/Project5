@@ -20,6 +20,16 @@ public class Critter2 extends Critter {
 	}
 	
 	@Override
+	public CritterShape viewShape() {
+		return CritterShape.SQUARE;
+	}
+	
+	@Override 
+	public Color viewColor(){
+		return Color.CYAN;
+	}
+	
+	@Override
 	public void doTimeStep(){
 		//Critter 2 will run
 		run(Critter.getRandomInt(7));
@@ -29,16 +39,18 @@ public class Critter2 extends Critter {
 	
 	@Override
 	public boolean fight (String opponent){
+		
+		boolean steps1 = true;
+		boolean steps2 = false;
+		for (int i = 0; i<8; i++){
+			if ((look(i, steps1) != null || look(i, steps2) != null)  && (look(i, steps1).equals("3") || look(i, steps2).equals("3"))){
+				return true;
+			}
+		}
 		//Critter 2 will only fight with Critter 1 and Critter 3, else it doesn't
 		if (opponent == "1" || opponent == "3"){
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public CritterShape viewShape() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	}	
 }
