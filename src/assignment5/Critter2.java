@@ -12,6 +12,8 @@
  */
 package assignment5;
 
+import javafx.scene.paint.Color;
+
 public class Critter2 extends Critter {
 	
 	@Override
