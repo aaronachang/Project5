@@ -1,5 +1,5 @@
 /* CRITTERS Critter3.java
- * EE422C Project 4 submission by
+ * EE422C Project 5 submission by
  * Aaron Chang
  * AAC3434
  * 16475
@@ -11,6 +11,8 @@
  * Fall 2016
  */
 package assignment5;
+
+import javafx.scene.paint.Color;
 
 public class Critter3 extends Critter {
 
@@ -34,8 +36,8 @@ public class Critter3 extends Critter {
 		int direction = Critter.getRandomInt(7);
 		boolean steps = false; //look 1 space
 		
-		for (int i = 0; i < 100; i++){
-			if(look(direction, steps) == null || look(direction, steps) == "3"){
+		for (int i = 0; i < 150; i++){
+			if(look(direction, steps) == null || !look(direction, steps).equals("3")){
 				break;
 			}
 			direction = Critter.getRandomInt(7);
@@ -47,15 +49,6 @@ public class Critter3 extends Critter {
 		reproduce(child, Critter.getRandomInt(7));
 	}
 	
-	
-	@Override
-	public void doTimeStep() {
-		// Critter3 walks around randomly
-		walk(Critter.getRandomInt(7));
-		Critter3 child = new Critter3();
-		reproduce(child, Critter.getRandomInt(7));
-	}
-
 	@Override
 	public boolean fight(String opponent) {
 		// Critter3 doesn't fight odd critters
