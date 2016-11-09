@@ -20,6 +20,11 @@ public class Critter4 extends Critter{
 	}
 	
 	@Override
+	public CritterShape viewShape() {
+		return CritterShape.DIAMOND;
+	}	
+	
+	@Override
 	public void doTimeStep() {
 		// Critter4 only walks in cardinal directions
 		walk(Critter.getRandomInt(3) * 2); 
@@ -34,11 +39,4 @@ public class Critter4 extends Critter{
 		if (opponent == "4") { return true; }
 		return false;
 	}
-
-	@Override
-	public CritterShape viewShape() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
