@@ -27,7 +27,7 @@ public class Critter3 extends Critter {
 	}
 	
 	@Override
-	public Color viewFillColor(){
+	public Color viewOutlineColor(){
 		return Color.DARKORCHID;
 	}
 	
