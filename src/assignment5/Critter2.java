@@ -45,13 +45,13 @@ public class Critter2 extends Critter {
 		boolean steps1 = true;
 		boolean steps2 = false;
 		for (int i = 0; i<8; i++){
-			if ((look(i, steps1) != null || look(i, steps2) != null)  && (look(i, steps1).equals("3") || look(i, steps2).equals("3"))){
+			if (look(i, steps1) != null && look(i, steps2) != null){  
+				//Critter 2 will only fight with Critter 1 and Critter 3, else it doesn't
+				if ((look(i, steps1).equals("1") || look(i, steps2).equals("1")) || 
+				(look(i, steps1).equals("3") || look(i, steps2).equals("3"))){
 				return true;
 			}
 		}
-		//Critter 2 will only fight with Critter 1 and Critter 3, else it doesn't
-		if (opponent == "1" || opponent == "3"){
-			return true;
 		}
 		return false;
 	}	
