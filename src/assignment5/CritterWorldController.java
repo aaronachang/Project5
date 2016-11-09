@@ -34,6 +34,7 @@ public class CritterWorldController implements Initializable {
 	@FXML private Text totalSteps;
 	@FXML private TextField seedField;
 	@FXML private TextField critterAddCount;
+	@FXML private TextField addSteps;
 	@FXML private ChoiceBox<String> critterSelect;
     @FXML private Canvas critterCanvas;
     @FXML private AnchorPane critterPane;
@@ -61,9 +62,6 @@ public class CritterWorldController implements Initializable {
         	critterCanvas.setScaleX(2.0 * (newValue.intValue()/100.0));
         	critterCanvas.setScaleY(2.0 * (newValue.intValue()/100.0));
         	centerNodeInScrollPane(scrollPane, (Node) critterCanvas);
-            //scrollPane.setS
-            //node.setTranslateX(node.getScene().getWidth()/4);     
-            //node.setTranslateY(node.getScene().getHeight()/4);
         });
         animationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
         	editTime(10200 / (newValue.longValue() + 1));
@@ -77,27 +75,17 @@ public class CritterWorldController implements Initializable {
             		String classes = fileName.substring(0, fileName.length() - 5);
 
 					try {
-//						Class<?> myCritter = Class.forName("assignment5." + classes);
-//						if (myCritter.getConstructor().newInstance() instanceof Critter) {
-//						Object instanceOfMyCritter = myCritter.getConstructor().newInstance();
-//	        		    Critter me = (Critter) instanceOfMyCritter;
-							critterSelect.getItems().add(classes);
-							javaFiles.add(classes);
-//						}
-	            		//System.out.println(fileName.substring(0, fileName.length() - 5));
-					} catch (Exception e) {
-						//System.out.println(fileName.substring(0, fileName.length() - 5));
-					}
+						if (!file.getName().equals("AlgaephobicCritter.java")) {
+							Class<?> myCritter = Class.forName("assignment5." + classes);
+							Object instanceOfMyCritter = myCritter.getConstructor().newInstance();
+							Critter me = (Critter) instanceOfMyCritter;
+						}
+						critterSelect.getItems().add(classes);
+						javaFiles.add(classes);
+					} catch (Exception e) {}
             	}
             }
         }
-//        
-//        critterSelect.getItems().add("Algae");
-//        critterSelect.getItems().add("Craig");
-//        critterSelect.getItems().add("Critter1");
-//        critterSelect.getItems().add("Critter2");
-//        critterSelect.getItems().add("Critter3");
-//        critterSelect.getItems().add("Critter4");
     }
     
     @FXML
@@ -105,13 +93,19 @@ public class CritterWorldController implements Initializable {
     	Critter.clearWorld();
     	draw(critterCanvas, Params.world_width*SQ_SIZE, Params.world_height*SQ_SIZE);
     	totalSteps.setText("");
-    	System.out.println("Population reset.");
+    	//System.out.println("Population reset.");
+    }
+    
+    @FXML 
+    protected void multipleSteps() {
+    	for (int i = 0; i < Integer.parseInt(addSteps.getText()); i++){
+    		doStep();
+    	}
     }
     
     @FXML
     protected void doStep() { 
     	Critter.worldTimeStep();
-    	System.out.println(Params.refresh_algae_count);
         
         draw(critterCanvas, Params.world_width*SQ_SIZE, Params.world_height*SQ_SIZE);
         totalSteps.setText("Step " + Critter.timestep);

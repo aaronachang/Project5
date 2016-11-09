@@ -74,12 +74,12 @@
                            <bottom>
                               <HBox prefHeight="38.0" prefWidth="152.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TextField prefHeight="27.0" prefWidth="50.0" text="1">
+                                    <TextField fx:id="addSteps" prefHeight="27.0" prefWidth="50.0" text="1">
                                        <HBox.margin>
                                           <Insets left="4.0" top="4.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button fx:id="stepButton" mnemonicParsing="false" onAction="#doStep" prefHeight="27.0" prefWidth="102.0" text="Step">
+                                    <Button fx:id="stepButton" mnemonicParsing="false" onAction="#multipleSteps" prefHeight="27.0" prefWidth="102.0" text="Step">
                                        <HBox.margin>
                                           <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                        </HBox.margin>
