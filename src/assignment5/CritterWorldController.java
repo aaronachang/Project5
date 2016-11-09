@@ -75,13 +75,13 @@ public class CritterWorldController implements Initializable {
             		String classes = fileName.substring(0, fileName.length() - 5);
 
 					try {
-						if (!file.getName().equals("AlgaephobicCritter.java")) {
-							Class<?> myCritter = Class.forName("assignment5." + classes);
-							Object instanceOfMyCritter = myCritter.getConstructor().newInstance();
-							Critter me = (Critter) instanceOfMyCritter;
+						Class<?> myCritter = Class.forName("assignment5.Critter");
+						Class<?> myClasses = Class.forName("assignment5." + classes);
+						if (!classes.equals("Critter") && myCritter.isAssignableFrom(myClasses)) {
+							critterSelect.getItems().add(classes);
+							javaFiles.add(classes);
+							System.out.println(classes);
 						}
-						critterSelect.getItems().add(classes);
-						javaFiles.add(classes);
 					} catch (Exception e) {}
             	}
             }
