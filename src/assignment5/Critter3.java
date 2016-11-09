@@ -20,6 +20,35 @@ public class Critter3 extends Critter {
 	}
 	
 	@Override
+	public CritterShape viewShape(){
+		return CritterShape.STAR;
+	}
+	
+	@Override
+	public Color viewFillColor(){
+		return Color.DARKORCHID;
+	}
+	
+	@Override
+	public void doTimeStep() {
+		int direction = Critter.getRandomInt(7);
+		boolean steps = false; //look 1 space
+		
+		for (int i = 0; i < 100; i++){
+			if(look(direction, steps) == null || look(direction, steps) == "3"){
+				break;
+			}
+			direction = Critter.getRandomInt(7);
+		}
+		
+		// Critter3 walks around randomly
+		walk(direction);
+		Critter3 child = new Critter3();
+		reproduce(child, Critter.getRandomInt(7));
+	}
+	
+	
+	@Override
 	public void doTimeStep() {
 		// Critter3 walks around randomly
 		walk(Critter.getRandomInt(7));
@@ -33,11 +62,5 @@ public class Critter3 extends Critter {
 		char c = opponent.charAt(0); 
 		if (c % 2 == 0) { return true; }
 		return false;
-	}
-
-	@Override
-	public CritterShape viewShape() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
