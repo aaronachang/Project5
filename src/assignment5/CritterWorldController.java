@@ -206,67 +206,6 @@ public class CritterWorldController implements Initializable {
     }
     
     private void draw(Canvas canvas, int width, int height) {
-        
-        int startX = (int)(canvas.getWidth() / 2 - width / 2.0);
-        int startY = (int)(canvas.getHeight() / 2 - height / 2.0);
-        int endX = (int)(canvas.getWidth() / 2 + width / 2.0);
-        int endY = (int)(canvas.getHeight() / 2 + height / 2.0);
-        
-        gc.setFill(Color.WHITE);
-        gc.setStroke(Color.BLACK);
-        gc.fillRect(startX, startY, endX, endY);
-        gc.setLineWidth(1.0);
-
-        for (int x = startX; x <= endX; x += SQ_SIZE) {
-            gc.strokeLine(x, 0, x, (double)endY);
-        }
-
-        for (int y = startY; y <= endY; y += SQ_SIZE) {
-            gc.strokeLine(0, y, (double)endX, y);
-        }
-        
-        
-        for (Critter c : Critter.getPopulation()) {
-        	gc.setStroke(c.viewOutlineColor());
-        	gc.setFill(c.viewColor());
-			int leftX = startX + c.getX_coord()*SQ_SIZE;
-			int topY = startY + c.getY_coord()*SQ_SIZE;
-        	switch(c.viewShape()) {
-    			case CIRCLE:
-    				gc.fillOval(startX + c.getX_coord()*SQ_SIZE, startY + c.getY_coord()*SQ_SIZE, SQ_SIZE, SQ_SIZE);
-    				gc.strokeOval(startX + c.getX_coord()*SQ_SIZE, startY + c.getY_coord()*SQ_SIZE, SQ_SIZE, SQ_SIZE); 
-    				break;
-    		
-    			case TRIANGLE:
-    				double[] xPointsTriangle = {leftX + SQ_SIZE/2, leftX + SQ_SIZE, leftX};
-    				double[] yPointsTriangle = {topY, topY + SQ_SIZE, topY + SQ_SIZE};
-    				gc.fillPolygon(xPointsTriangle, yPointsTriangle, 3);
-    				gc.strokePolygon(xPointsTriangle, yPointsTriangle, 3);
-    				break;
-				
-    			case DIAMOND:
-    				double[] xPointsDiamond = {leftX + SQ_SIZE/2, leftX + SQ_SIZE, leftX + SQ_SIZE/2, leftX};
-    				double[] yPointsDiamond = {topY, topY + SQ_SIZE/2, topY + SQ_SIZE, topY + SQ_SIZE/2};
-    				gc.fillPolygon(xPointsDiamond, yPointsDiamond, 4);
-    				gc.strokePolygon(xPointsDiamond, yPointsDiamond, 4);
-    				break;
-    				
-    			case STAR:
-    				double[] xPointsStar = {leftX + SQ_SIZE/2, leftX + SQ_SIZE*9/14, leftX + SQ_SIZE, 
-    						leftX + SQ_SIZE*10.5/14, leftX + SQ_SIZE*6/7, leftX + SQ_SIZE/2, leftX + SQ_SIZE/7, 
-    						leftX + SQ_SIZE*3.5/14, leftX, leftX + SQ_SIZE*5/14};
-    				double[] yPointsStar = {topY, topY + SQ_SIZE*5/14, topY + SQ_SIZE*5.5/14, topY + SQ_SIZE*9/14,
-    						topY + SQ_SIZE, topY + SQ_SIZE*11.5/14, topY + SQ_SIZE, topY + SQ_SIZE*9/14,
-    						topY + SQ_SIZE*5.5/14, topY + SQ_SIZE*5/14};
-    				gc.fillPolygon(xPointsStar, yPointsStar, 10);
-    				gc.strokePolygon(xPointsStar, yPointsStar, 10);
-    				break;
-				
-    			default:
-    				gc.fillRect(startX + c.getX_coord()*SQ_SIZE, startY + c.getY_coord()*SQ_SIZE, SQ_SIZE, SQ_SIZE);
-    				gc.strokeRect(startX + c.getX_coord()*SQ_SIZE, startY + c.getY_coord()*SQ_SIZE, SQ_SIZE, SQ_SIZE);
-    				break;
-        	}
-        }
+        Critter.drawWorld(gc, canvas, width, height, SQ_SIZE);
     }
 }
